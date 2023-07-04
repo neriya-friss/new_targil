@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap CSS -->
+        <script src="/javascripts/jquery.min.js"></script>    
+        <script src="/javascripts/bootstrap.min.js"></script>
+        <link href="/stylesheets/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="/stylesheets/style.css"> 
+        <title> targil </title>    
+    </head>
+    <body>    
+            <div class="container">
+                <a class="navbar-brand" href="/logout">התנתק</a>
+                <header class="header">
+                    <h1 id="title" class="text-center">הוספת תרגיל</h1>
+                    <h2 class="text-center" id="timing"> </h2>
+                </header>
+                <div class="form-wrap">	
+                    <form id="survey-form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label id="hebrow_name-label" for="hebrow_name"> שם התרגיל בעברית </label>
+                                    <input type="text" name="hebrow_name" id="hebrow_name" placeholder="הכנס את שם התרגיל בעברית" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label id="eng-name-label" for="eng-name">שם התרגיל באנגלית </label>
+                                    <input type="text" name="eng-name" id="eng-name" placeholder="הכנס את שם התרגיל באנגלית" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label id="db_name-label" for="db_name"> שם ה- DB  </label>
+                                    <input type="text" name="db_name" id="db_name"  class="form-control" placeholder="הכנס את שם ה DB באנגלית" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>התרגיל שלי מבוסס על:</label>
+                                    <select id="dropdown_copy_targil" name="copy_targil" class="form-control" required>
+                                        <option disabled selected value>בחר תרגיל לשכפול</option>
+                                        <option value="תרגיל 1">תרגיל 1</option>
+                                        <option value="תרגיל 1">תרגיל 2</option>
+                                        <option value="תרגיל 3">תרגיל 3</option>
+                                        <option value="תרגיל 4">תרגיל 4</option>
+                                        <option value="תרגיל 5">תרגיל 5</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row col-md-10 m-auto">
+                            <div class="col-md-2 text-center m-2" >
+                                <div class="form-group">
+                                    <label>שיחות</label>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="cv_yes" value="cv_yes" name="cv_radio" class="custom-control-input" checked="">
+                                        <label class="custom-control-label" for="cv_radio">כן</label>
+                                        <input type="radio" id="cv_no" value="cv_no" name="cv_radio" class="custom-control-input">
+                                        <label class="custom-control-label" for="cv_radio">לא</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 text-center m-2" >
+                                <div class="form-group">
+                                    <label>רע"ם</label>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="raam_yes" value="raam_yes" name="raam_radio" class="custom-control-input">
+                                        <label class="custom-control-label" for="raam_radio">כן</label>
+                                        <input type="radio" id="raam_no" value="raam_no" name="raam_radio" class="custom-control-input" checked="">
+                                        <label class="custom-control-label" for="raam_radio">לא</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 text-center m-2" >
+                                <div class="form-group">
+                                    <label> שיגורים </label>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="lunch_yes" value="lunch_yes" name="lunch_radio" class="custom-control-input">
+                                        <label class="custom-control-label" for="lunch_yes">כן</label>
+                                        <input type="radio" id="lunch_no" value="lunch_no" name="lunch_radio" class="custom-control-input" checked="">
+                                        <label class="custom-control-label" for="lunch_no">לא</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 text-center m-2" >
+                                <div class="form-group">
+                                    <label> חוזי </label>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="lunch_yes" value="lunch_yes" name="lunch_radio" class="custom-control-input">
+                                        <label class="custom-control-label" for="lunch_yes">כן</label>
+                                        <input type="radio" id="lunch_no" value="lunch_no" name="lunch_radio" class="custom-control-input" checked="">
+                                        <label class="custom-control-label" for="lunch_no">לא</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 text-center m-2" >
+                                <div class="form-group">
+                                    <label> משואה </label>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="lunch_yes" value="lunch_yes" name="lunch_radio" class="custom-control-input">
+                                        <label class="custom-control-label" for="lunch_yes">כן</label>
+                                        <input type="radio" id="lunch_no" value="lunch_no" name="lunch_radio" class="custom-control-input" checked="">
+                                        <label class="custom-control-label" for="lunch_no">לא</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        
+                        <div class="row">
+                            <div class="text-center">
+                                <button type="submit" id="submit" class="btn btn-primary btn-block" > פתח תרגיל </button>
+                            </div>
+                        </div>
+            
+                    </form>
+            </div>
+        <script>
+			let date_now = new Date();
+			let hours = date_now.getHours()
+			console.log(hours);
+			if(hours >= 5 && hours <=11){
+				document.getElementById("timing").innerHTML = "בוקר טוב "
+			}
+			else if(hours >= 12 && hours <=17){
+				document.getElementById("timing").innerHTML = "צהרים טובים "
+			}
+			else if(hours >= 18 && hours <=21){
+				document.getElementById("timing").innerHTML = "ערב טוב "
+			}
+			else{
+				document.getElementById("timing").innerHTML = "לילה טוב "
+			}
+
+          </script>
+    </body>
+</html>
