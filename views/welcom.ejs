@@ -6,31 +6,33 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap CSS -->
         <script src="/javascripts/jquery.min.js"></script>    
-        <script src="/javascripts/bootstrap.min.js"></script>
+        <script src="/javascripts/bootstrap.min.js"></script>   
+        <script src="/javascripts/selectize.min.js"></script>
+        <link rel="stylesheet" href="/stylesheets/selectize.bootstrap3.min.css"/>
         <link href="/stylesheets/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="/stylesheets/style.css"> 
-        <title> targil </title>    
+        <title> targil </title> 
     </head>
     <body>    
             <div class="container">
-                <a class="navbar-brand" href="/logout">התנתק</a>
+                <a  href="/logout"> <button type="button" class="btn2 btn-danger mt-1"> התנתק </button> </a>
                 <header class="header">
                     <h1 id="title" class="text-center">הוספת תרגיל</h1>
                     <h2 class="text-center" id="timing"> </h2>
                 </header>
                 <div class="form-wrap">	
-                    <form id="survey-form">
+                    <form id="survey-form" action="/add-targil" method="POST">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label id="hebrow_name-label" for="hebrow_name"> שם התרגיל בעברית </label>
-                                    <input type="text" name="hebrow_name" id="hebrow_name" placeholder="הכנס את שם התרגיל בעברית" class="form-control" required>
+                                    <input type="text" name="hebrow_name" id="hebrow_name" placeholder="הכנס את שם התרגיל בעברית" class="form-control only_hebrew" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label id="eng-name-label" for="eng-name">שם התרגיל באנגלית </label>
-                                    <input type="text" name="eng-name" id="eng-name" placeholder="הכנס את שם התרגיל באנגלית" class="form-control" required>
+                                    <label id="eng_name-label" for="eng_name">שם התרגיל באנגלית </label>
+                                    <input type="text" name="eng_name" id="eng_name" placeholder="הכנס את שם התרגיל באנגלית" class="form-control only_english" required>
                                 </div>
                             </div>
                         </div>
@@ -38,19 +40,17 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label id="db_name-label" for="db_name"> שם ה- DB  </label>
-                                    <input type="text" name="db_name" id="db_name"  class="form-control" placeholder="הכנס את שם ה DB באנגלית" required>
+                                    <input type="text" name="db_name" id="db_name"  class="form-control only_english" placeholder="הכנס את שם ה DB באנגלית" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>התרגיל שלי מבוסס על:</label>
-                                    <select id="dropdown_copy_targil" name="copy_targil" class="form-control" required>
+                                    <select id="dropdown_copy_targil" name="copy_targil" class="form-control selectpicker" data-live-search="true" required>
                                         <option disabled selected value>בחר תרגיל לשכפול</option>
-                                        <option value="תרגיל 1">תרגיל 1</option>
-                                        <option value="תרגיל 1">תרגיל 2</option>
-                                        <option value="תרגיל 3">תרגיל 3</option>
-                                        <option value="תרגיל 4">תרגיל 4</option>
-                                        <option value="תרגיל 5">תרגיל 5</option>
+                                        <% for(var i=0; i < courtName.length; i++) { %>
+                                            <option data-tokens="<%= courtName[i].courtName %>" value="<%= courtName[i].courtName %>"> <%= courtName[i].courtName %> </option>
+                                        <% } %>
                                     </select>
                                 </div>
                             </div>
@@ -63,9 +63,9 @@
                                 <div class="form-group">
                                     <label>שיחות</label>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="cv_yes" value="cv_yes" name="cv_radio" class="custom-control-input" checked="">
+                                        <input type="radio" id="cv_yes" value="cv_yes" name="cv_radio" class="custom-control-input">
                                         <label class="custom-control-label" for="cv_radio">כן</label>
-                                        <input type="radio" id="cv_no" value="cv_no" name="cv_radio" class="custom-control-input">
+                                        <input type="radio" id="cv_no" value="cv_no" name="cv_radio" class="custom-control-input" checked="">
                                         <label class="custom-control-label" for="cv_radio">לא</label>
                                     </div>
                                 </div>
@@ -73,7 +73,7 @@
 
                             <div class="col-md-2 text-center m-2" >
                                 <div class="form-group">
-                                    <label>רע"ם</label>
+                                    <label>רעם</label>
                                     <div class="custom-control custom-radio custom-control-inline">
                                         <input type="radio" id="raam_yes" value="raam_yes" name="raam_radio" class="custom-control-input">
                                         <label class="custom-control-label" for="raam_radio">כן</label>
@@ -99,10 +99,10 @@
                                 <div class="form-group">
                                     <label> חוזי </label>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="lunch_yes" value="lunch_yes" name="lunch_radio" class="custom-control-input">
-                                        <label class="custom-control-label" for="lunch_yes">כן</label>
-                                        <input type="radio" id="lunch_no" value="lunch_no" name="lunch_radio" class="custom-control-input" checked="">
-                                        <label class="custom-control-label" for="lunch_no">לא</label>
+                                        <input type="radio" id="hozi_yes" value="hozi_yes" name="hozi_radio" class="custom-control-input">
+                                        <label class="custom-control-label" for="hozi_yes">כן</label>
+                                        <input type="radio" id="hozi_no" value="hozi_no" name="hozi_radio" class="custom-control-input" checked="">
+                                        <label class="custom-control-label" for="hozi_no">לא</label>
                                     </div>
                                 </div>
                             </div>
@@ -111,16 +111,24 @@
                                 <div class="form-group">
                                     <label> משואה </label>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="lunch_yes" value="lunch_yes" name="lunch_radio" class="custom-control-input">
-                                        <label class="custom-control-label" for="lunch_yes">כן</label>
-                                        <input type="radio" id="lunch_no" value="lunch_no" name="lunch_radio" class="custom-control-input" checked="">
-                                        <label class="custom-control-label" for="lunch_no">לא</label>
+                                        <input type="radio" id="mas_yes" value="mas_yes" name="mas_radio" class="custom-control-input">
+                                        <label class="custom-control-label" for="mas_yes">כן</label>
+                                        <input type="radio" id="mas_no" value="mas_no" name="mas_radio" class="custom-control-input" checked="">
+                                        <label class="custom-control-label" for="mas_no">לא</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-    
-                        
+                       
+                        <div class="row text-center">
+                            <div class="col-md-4 m-auto" id="cv_insert_name">
+                                <div class="form-group">
+                                    <label id="cv_name-label" for="cv_name"> שם סביבה לשיחות</label>
+                                    <input type="text" name="cv_name" id="cv_name"  class="form-control only_english" placeholder="הכנס את שם הסביבה באנגלית">
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="text-center">
                                 <button type="submit" id="submit" class="btn btn-primary btn-block" > פתח תרגיל </button>
@@ -130,21 +138,66 @@
                     </form>
             </div>
         <script>
-			let date_now = new Date();
-			let hours = date_now.getHours()
-			console.log(hours);
-			if(hours >= 5 && hours <=11){
-				document.getElementById("timing").innerHTML = "בוקר טוב "
-			}
-			else if(hours >= 12 && hours <=17){
-				document.getElementById("timing").innerHTML = "צהרים טובים "
-			}
-			else if(hours >= 18 && hours <=21){
-				document.getElementById("timing").innerHTML = "ערב טוב "
-			}
-			else{
-				document.getElementById("timing").innerHTML = "לילה טוב "
-			}
+            $(document).ready(function () {
+
+                let date_now = new Date();
+                let hours = date_now.getHours()
+                console.log(hours);
+                if(hours >= 5 && hours <=11){
+                    document.getElementById("timing").innerHTML = "בוקר טוב "
+                }
+                else if(hours >= 12 && hours <=17){
+                    document.getElementById("timing").innerHTML = "צהרים טובים "
+                }
+                else if(hours >= 18 && hours <=21){
+                    document.getElementById("timing").innerHTML = "ערב טוב "
+                }
+                else{
+                    document.getElementById("timing").innerHTML = "לילה טוב "
+                }
+
+                $('select').selectize({
+                    sortField: 'text'
+                });
+
+                $(".only_english").keypress(function(event){
+                    var ew = event.which;
+                    if(ew == 32 || ew == 46 || ew == 95 || ew == 45)
+                        return true;
+                    if(48 <= ew && ew <= 57)
+                        return true;
+                    if(65 <= ew && ew <= 90)
+                        return true;
+                    if(97 <= ew && ew <= 122)
+                        return true;
+                    return false;
+                });
+
+                $(".only_hebrew").keypress(function(event){
+                    var ew = event.which;
+                    if(ew == 32 || ew == 46 || ew == 95 || ew == 45)
+                        return true;
+                    if(48 <= ew && ew <= 57)
+                        return true;
+                    if(128 <= ew)
+                        return true;
+                    return false;
+                });
+
+                $("#cv_insert_name").hide();
+                $('#cv_yes').click(function () {
+                    if( $('#cv_yes').is(':checked') ){
+                        $("#cv_insert_name").slideToggle(1000);
+                        $("#cv_name").prop('required',true);   
+                    }
+                });
+                $('#cv_no').click(function () {
+                    if( $('#cv_no').is(':checked') ){
+                        $("#cv_insert_name").slideToggle(1000);
+                        $("#cv_name").prop('required',false); 
+                    }
+                });
+            });  
 
           </script>
     </body>
