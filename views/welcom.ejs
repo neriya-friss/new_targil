@@ -21,7 +21,14 @@
                     <h2 class="text-center" id="timing"> </h2>
                 </header>
                 <div class="form-wrap">	
-                    <form id="survey-form" action="/add-targil" method="POST">
+                    <div class="row mb-3">
+                        <div class="button r" id="button-1">
+                            <input id="new_or_exsist" type="checkbox" class="checkbox" />
+                            <div class="knobs"></div>
+                            <div class="layer"></div>
+                        </div>
+                    </div>
+                    <form id="new_targil" action="/add-targil" method="POST">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -136,6 +143,31 @@
                         </div>
             
                     </form>
+
+
+
+                    <form id="exsist_targil">
+                        <div class="row">
+                            <div class="col-md-6 m-auto">
+                                <div class="form-group">
+                                    <label> שם ה court </label>
+                                    <select id="dropdown_copy_targil" name="copy_targil" class="form-control selectpicker" data-live-search="true" required>
+                                        <option disabled selected value> בחר תרגיל מהרשימה </option>
+                                        <% for(var i=0; i < courtName.length; i++) { %>
+                                            <option data-tokens="<%= courtName[i].courtName %>" value="<%= courtName[i].courtName %>"> <%= courtName[i].courtName %> </option>
+                                        <% } %>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <div class="row">
+                            <div class="text-center">
+                                <button type="submit" id="submit" class="btn btn-primary btn-block" > ערוך תרגיל </button>
+                            </div>
+                        </div>
+                    </form>
             </div>
         <script>
             $(document).ready(function () {
@@ -197,8 +229,14 @@
                         $("#cv_name").prop('required',false); 
                     }
                 });
+
+                $("#new_or_exsist").click(function(){
+                   $("#new_targil").slideToggle(500);
+                   $("#exsist_targil").slideToggle(500);
+                });
             });  
 
           </script>
+
     </body>
 </html>

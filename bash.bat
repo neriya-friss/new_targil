@@ -20,3 +20,5 @@ for %%A in (%*) do (
     echo %%A >> "%filePath%"
 )
 
+pause 
+
