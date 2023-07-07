@@ -56,15 +56,16 @@ router.post('/add-targil', function(req, res, next){
     let eng_name = req.body.eng_name;
     let db_name = req.body.db_name;
     let copy_targil = req.body.copy_targil;
+    let computer_targil = req.body.computer_targil
     let cv_radio = req.body.cv_radio;
     let raam_radio = req.body.raam_radio;
     let lunch_radio = req.body.lunch_radio;
     let hozi_radio = req.body.hozi_radio;
     let mas_radio = req.body.mas_radio;
 
-    console.log(hebrow_name, eng_name, db_name, copy_targil, cv_radio, raam_radio, lunch_radio, hozi_radio, mas_radio);
+    console.log(hebrow_name, eng_name, db_name, copy_targil, computer_targil,  cv_radio, raam_radio, lunch_radio, hozi_radio, mas_radio);
    
-    const command = `${path_of_file} "${hebrow_name}" "${eng_name}" "${db_name}" "${copy_targil}" "${cv_radio}"  "${raam_radio}"  "${lunch_radio}"  "${hozi_radio}" "${mas_radio}" `;
+    const command = `${path_of_file} "${hebrow_name}" "${eng_name}" "${db_name}" "${copy_targil}" "${computer_targil}"  "${cv_radio}"  "${raam_radio}"  "${lunch_radio}"  "${hozi_radio}" "${mas_radio}" `;
     console.log("command", command);
     const batProcess = spawn(command, [], { shell: true });
 
